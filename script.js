@@ -44,7 +44,7 @@ async function extractTextFromImage(image) {
 }
 
 async function interpretTicketInfo(text) {
-    const openaiApiKey = 'sk-proj-flWqjMQ3S8xSX8qRv5kCT3BlbkFJlQgfw83Pv5F5nV5Vf1dx';
+    const openaiApiKey = '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';
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
