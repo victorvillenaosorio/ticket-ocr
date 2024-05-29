@@ -44,33 +44,24 @@ async function extractTextFromImage(image) {
 }
 
 async function interpretTicketInfo(text) {
-    const openaiApiKey = process.env.OPENAI_API_KEY;
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    const response = await fetch('/api/chatgpt', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${openaiApiKey}`
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            model: 'gpt-4-turbo',
-            messages: [
-                {
-                    role: 'user',
-                    content: `Extract the following information from the ticket text and return it in JSON format: 
-                    Store Information (Name, Address, Phone, Website), 
-                    Transaction Information (Date, Time, Ticket Number, Cashier ID), 
-                    Items (Description, Quantity, Unit Price), 
-                    Pricing Information (Subtotal, Taxes, Total). 
-                    Here is the text extracted from the ticket: ${text}`
-                }
-            ],
-            max_tokens: 1000
+            content: `Extract the following information from the ticket text and return it in JSON format: 
+            Store Information (Name, Address, Phone, Website), 
+            Transaction Information (Date, Time, Ticket Number, Cashier ID), 
+            Items (Description, Quantity, Unit Price), 
+            Pricing Information (Subtotal, Taxes, Total). 
+            Here is the text extracted from the ticket: ${text}`
         })
     });
 
     const data = await response.json();
     const cleanedResponse = data.choices[0].message.content;
-    
+
     const jsonString = extractJsonString(cleanedResponse);
 
     try {
