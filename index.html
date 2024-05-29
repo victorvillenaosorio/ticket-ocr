@@ -19,14 +19,18 @@
             <input type="file" id="fileInput" name="file" accept="image/*">
             <button type="submit">Subir</button>
         </form>
+        <div id="loader" class="hidden"></div>
         <button id="toggleJson">Mostrar/Ocultar JSON</button>
         <pre id="jsonOutput" class="hidden"></pre>
-        <div id="ticketInfo" class="hidden">
-            <h2>Información del Ticket</h2>
-            <div id="storeInfo"></div>
-            <div id="transactionInfo"></div>
-            <div id="itemsInfo"></div>
-            <div id="pricingInfo"></div>
+        <div id="resultContainer" class="hidden">
+            <div id="imageContainer"></div>
+            <div id="ticketInfo">
+                <h2>Información del Ticket</h2>
+                <div id="storeInfo"></div>
+                <div id="transactionInfo"></div>
+                <div id="itemsInfo"></div>
+                <div id="pricingInfo"></div>
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2/dist/tesseract.min.js"></script>

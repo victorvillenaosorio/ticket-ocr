@@ -4,11 +4,14 @@ document.getElementById('uploadForm').onsubmit = async function(e) {
     const file = fileInput.files[0];
     const reader = new FileReader();
 
+    document.getElementById('loader').classList.remove('hidden');
+    document.getElementById('resultContainer').classList.add('hidden');
+
     reader.onloadend = async function() {
         const image = reader.result;
         const extractedText = await extractTextFromImage(image);
         const ticketInfo = await interpretTicketInfo(extractedText);
-        displayTicketInfo(ticketInfo);
+        displayTicketInfo(ticketInfo, image);
     };
 
     reader.readAsDataURL(file);
@@ -41,7 +44,7 @@ async function extractTextFromImage(image) {
 }
 
 async function interpretTicketInfo(text) {
-    const openaiApiKey = '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';
+    const openaiApiKey = 'sk-proj-flWqjMQ3S8xSX8qRv5kCT3BlbkFJlQgfw83Pv5F5nV5Vf1dx';
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
@@ -66,11 +69,10 @@ async function interpretTicketInfo(text) {
     });
 
     const data = await response.json();
-    const cleanedResponse = data.choices[0].message.content.replace(/```json|```/g, '').trim();
-
-    // Eliminar cualquier texto después del cierre del JSON
-    const jsonString = cleanedResponse.substring(0, cleanedResponse.lastIndexOf('}') + 1);
+    const cleanedResponse = data.choices[0].message.content;
     
+    const jsonString = extractJsonString(cleanedResponse);
+
     try {
         const parsedResponse = JSON.parse(jsonString);
         document.getElementById('jsonOutput').textContent = JSON.stringify(parsedResponse, null, 2);
@@ -82,13 +84,22 @@ async function interpretTicketInfo(text) {
     }
 }
 
-function displayTicketInfo(info) {
+function extractJsonString(text) {
+    const jsonStart = text.indexOf('{');
+    const jsonEnd = text.lastIndexOf('}') + 1;
+    return text.substring(jsonStart, jsonEnd);
+}
+
+function displayTicketInfo(info, image) {
+    document.getElementById('loader').classList.add('hidden');
+    document.getElementById('resultContainer').classList.remove('hidden');
+
+    document.getElementById('imageContainer').innerHTML = `<img src="${image}" alt="Ticket Image">`;
+
     document.getElementById('storeInfo').innerHTML = formatStoreInfo(info["Store Information"]);
     document.getElementById('transactionInfo').innerHTML = formatTransactionInfo(info["Transaction Information"]);
     document.getElementById('itemsInfo').innerHTML = formatItemsInfo(info.Items);
     document.getElementById('pricingInfo').innerHTML = formatPricingInfo(info["Pricing Information"]);
-
-    document.getElementById('ticketInfo').classList.remove('hidden');
 }
 
 function formatStoreInfo(info) {
