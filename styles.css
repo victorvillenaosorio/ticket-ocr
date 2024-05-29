@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    width: 80%;
+}
+
+.hidden {
+    display: none;
+}
+
+#jsonOutput {
+    text-align: left;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background: #f9f9f9;
+}
+
+h2 {
+    margin-top: 20px;
+    text-align: left;
+}
+
+h3 {
+    text-align: left;
+}
+
+div {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+#toggleJson {
+    margin-top: 20px;
+    padding: 10px;
+    cursor: pointer;
+}
