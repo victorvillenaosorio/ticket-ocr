@@ -16,6 +16,11 @@ body {
     display: none;
 }
 
+#errorContainer {
+    color: red;
+    margin-top: 20px;
+}
+
 #loader {
     border: 16px solid #f3f3f3;
     border-top: 16px solid #3498db;

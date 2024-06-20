@@ -38,6 +38,7 @@ async function extractTextFromImage(image) {
             resolve(text);
         }).catch(err => {
             console.error(err);
+            showError(`Error extracting text from image. ${err}`);
             reject(err);
         });
     });
@@ -71,6 +72,7 @@ async function interpretTicketInfo(text) {
     } catch (e) {
         console.error("Error parsing JSON:", e);
         console.error("Cleaned response:", cleanedResponse);
+        showError(`Error parsing JSON: ${cleanedResponse} ${e}`);
         throw e;
     }
 }
@@ -133,4 +135,12 @@ function formatPricingInfo(info) {
         <strong>Impuestos:</strong> ${info.Taxes}<br>
         <strong>Total:</strong> ${info.Total}
     `;
+}
+
+function showError(message) {
+    document.getElementById('loader').classList.add('hidden');
+    document.getElementById('resultContainer').classList.add('hidden');
+    const errorContainer = document.getElementById('errorContainer');
+    errorContainer.textContent = message;
+    errorContainer.classList.remove('hidden');
 }
