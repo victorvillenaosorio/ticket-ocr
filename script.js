@@ -84,6 +84,7 @@ function extractJsonString(text) {
 }
 
 function displayTicketInfo(info, image) {
+    try{
     document.getElementById('loader').classList.add('hidden');
     document.getElementById('resultContainer').classList.remove('hidden');
 
@@ -93,6 +94,10 @@ function displayTicketInfo(info, image) {
     document.getElementById('transactionInfo').innerHTML = formatTransactionInfo(info["Transaction Information"]);
     document.getElementById('itemsInfo').innerHTML = formatItemsInfo(info.Items);
     document.getElementById('pricingInfo').innerHTML = formatPricingInfo(info["Pricing Information"]);
+    }
+    catch(e){
+        showError(`Error parsing JSON: ${e}`);
+    }
 }
 
 function formatStoreInfo(info) {
