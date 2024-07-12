@@ -84,7 +84,7 @@ async function interpretDocumentInfo(text, documentType) {
         Here is the text extracted from the ticket: ${text}`;
 
     try {
-        const response = await fetch('https://ticket-raeoij10n-victors-projects-cf9b92f8.vercel.app/api/chatgpt', { //http://localhost:3000/api/chatgpt
+        const response = await fetch('https://ticket-ocr.vercel.app/api/chatgpt', { //http://localhost:3000/api/chatgpt
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
