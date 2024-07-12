@@ -5,23 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Factura OCR</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>Subir Factura o Ticket</h1>
+        <h1>Extraer información de documento</h1>
         <form id="uploadForm">
-            <label for="documentType">Tipo de Documento:</label>
-            <select id="documentType" name="documentType">
-                <option value="ticket">Ticket</option>
-                <option value="factura">Factura</option>
-                <option value="dua">DUA</option>
-            </select>
+            <fieldset>
+                <legend>Tipo de Documento:</legend>
+                <label>
+                    <input type="radio" id="ticket" name="documentType" value="ticket" checked>
+                    <span>Ticket</span>
+                </label>
+                <label>
+                    <input type="radio" id="factura" name="documentType" value="factura">
+                    <span>Factura</span>
+                </label>
+                <label>
+                    <input type="radio" id="dua" name="documentType" value="dua">
+                    <span>DUA</span>
+                </label>
+            </fieldset>
             <input type="file" id="fileInput" name="file" accept="image/*">
             <button type="submit">Subir</button>
         </form>
-        <div id="loader" class="hidden"></div>
-        <div id="errorContainer" class="hidden"></div> <!-- Contenedor de errores -->
-        <!-- <button id="toggleJson">Mostrar/Ocultar JSON</button> -->
+        <button id="newDocument" class="hidden">Nuevo Documento</button>
+        <div id="loader" class="hidden">Procesando...</div>
+        <div id="errorContainer" class="hidden"></div>
+        <button id="toggleJson">Mostrar/Ocultar JSON</button>
         <pre id="jsonOutput" class="hidden"></pre>
         <div id="resultContainer" class="hidden">
             <div id="imageContainer"></div>
