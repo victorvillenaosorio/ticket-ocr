@@ -84,7 +84,7 @@ async function interpretDocumentInfo(text, documentType) {
         Here is the text extracted from the ticket: ${text}`;
 
     try {
-        const response = await fetch('http://localhost:3000/api/chatgpt', {
+        const response = await fetch('/api/chatgpt', { //http://localhost:3000/api/chatgpt
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
