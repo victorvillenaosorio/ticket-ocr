@@ -1,11 +1,12 @@
 import fetch from 'node-fetch';
-import dotenv from 'dotenv';
-import express from 'express';
-import bodyParser from 'body-parser';
+//import dotenv from 'dotenv';
+/* import express from 'express';
+import bodyParser from 'body-parser'; */
 
-dotenv.config();
+//dotenv.config();
 
-const handler = async (req, res) => {
+export default async function handler(req, res) {
+//const handler = async (req, res) => {
     try {
         const openaiApiKey = process.env.OPENAI_API_KEY;
 
@@ -44,7 +45,7 @@ const handler = async (req, res) => {
     }
 };
 
-export default handler;
+//export default handler;
 
 // If running locally, start an Express server
 /* if (process.argv.includes('local')) {
